@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Match Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .row {
+            margin-bottom: 16px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .status {
+            margin-top: 16px;
+            color: #444;
+        }
+
+        .results {
+            margin-top: 24px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: #fafafa;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        .score {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #b00020;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Демо рекомендаций событий</h1>
+
+        <div class="row">
+            <label for="userId">ID пользователя:</label>
+            <input type="number" id="userId" value="1" min="1">
+            <button onclick="loadRecommendations()">Получить рекомендации</button>
+        </div>
+
+        <div id="status" class="status"></div>
+        <div id="results" class="results"></div>
+    </div>
+
+    <script>
+        async function loadRecommendations() {
+            const userId = document.getElementById("userId").value;
+            const statusEl = document.getElementById("status");
+            const resultsEl = document.getElementById("results");
+
+            statusEl.textContent = "Загрузка...";
+            resultsEl.innerHTML = "";
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/recommend-events/${userId}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                statusEl.textContent = `Найдено рекомендаций: ${data.recommendations.length}`;
+
+                if (data.recommendations.length === 0) {
+                    resultsEl.innerHTML = "<p>Нет доступных рекомендаций.</p>";
+                    return;
+                }
+
+                for (const item of data.recommendations) {
+                    const card = document.createElement("div");
+                    card.className = "card";
+
+                    const scorePercent = (item.match_score * 100).toFixed(1);
+
+                    card.innerHTML = `
+                        <div class="title">${item.title}</div>
+                        <div class="meta"><strong>ID события:</strong> ${item.event_id}</div>
+                        <div class="meta"><strong>Теги:</strong> ${item.tags.join(", ")}</div>
+                        <div class="meta"><strong>Участники:</strong> ${item.participants.join(", ")}</div>
+                        <div class="score">Совместимость: ${scorePercent}%</div>
+                    `;
+
+                    resultsEl.appendChild(card);
+                }
+            } catch (error) {
+                statusEl.innerHTML = `<span class="error">Ошибка загрузки рекомендаций</span>`;
+                resultsEl.innerHTML = `<pre>${error.message}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>
