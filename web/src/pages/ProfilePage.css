@@ -988,51 +988,39 @@ html[data-color-scheme='dark'] .event-detail-overflow-item--complete:hover:not(:
   position: relative;
 }
 
-.public-profile-compat-hero-pct {
-  position: absolute;
-  top: 0.85rem;
-  right: 1rem;
-  display: flex;
-  align-items: baseline;
-  gap: 0.05em;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.public-profile-compat-hero-pct__value {
-  font-size: clamp(2rem, 6.5vw, 3rem);
-  font-weight: 850;
-  letter-spacing: -0.045em;
-  color: color-mix(in srgb, var(--accent) 36%, var(--text-h) 64%);
-}
-
-.public-profile-compat-hero-pct__suffix {
-  font-size: clamp(1.1rem, 3.4vw, 1.55rem);
-  font-weight: 800;
-  color: color-mix(in srgb, var(--accent) 28%, var(--muted) 72%);
-}
-
-html[data-color-scheme='dark'] .public-profile-compat-hero-pct__value {
-  color: color-mix(in srgb, var(--accent) 48%, #f9fafb 52%);
-}
-
-html[data-color-scheme='dark'] .public-profile-compat-hero-pct__suffix {
-  color: color-mix(in srgb, var(--accent) 40%, #9ca3af 60%);
-}
-
 .public-profile-identity-card .pp-identity-row {
-  padding-right: min(46%, 9rem);
+  padding-right: 0;
 }
 
-.public-profile-compat-breakdown {
-  text-align: center;
+.public-profile-interests-pct {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.04em;
+  padding: 0.32rem 0.62rem 0.34rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+  background: color-mix(in srgb, var(--accent-bg) 92%, var(--bg) 8%);
+  line-height: 1;
+}
+
+.public-profile-interests-pct__value {
+  font-size: 1.32rem;
+  font-weight: 820;
+  letter-spacing: -0.035em;
+  color: var(--text-h);
+}
+
+.public-profile-interests-pct__suffix {
+  font-size: 0.78rem;
+  font-weight: 750;
+  color: var(--muted);
 }
 
 .public-profile-interests-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 0.5rem 0.75rem;
   margin-bottom: 0.65rem;
@@ -1042,25 +1030,6 @@ html[data-color-scheme='dark'] .public-profile-compat-hero-pct__suffix {
   margin: 0;
   flex: 1 1 auto;
   min-width: 0;
-}
-
-.public-profile-compat-pill {
-  flex-shrink: 0;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.28rem 0.6rem;
-  border-radius: 999px;
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
-  color: var(--text-h);
-  max-width: 100%;
-  text-align: center;
-}
-
-.public-profile-compat-note {
-  font-size: 0.82rem;
-  flex-shrink: 0;
-  max-width: 100%;
 }
 
 .public-profile-character-card {

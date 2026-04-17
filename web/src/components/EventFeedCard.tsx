@@ -193,10 +193,10 @@ export function EventFeedCard({
               <span className="event-rec-status-badge event-rec-status-badge--inline" title="Статус">
                 {eventStatusLabel(status)}
               </span>
-              <button type="button" className="event-rec-score-hit" aria-label={`Совпадение ${pct} процентов`}>
-                <span className="event-rec-score-value">{pct}</span>
-                <span className="event-rec-score-suffix">%</span>
-              </button>
+              <span className="event-rec-match-badge" aria-label={`Совпадение ${pct} процентов`}>
+                <span className="event-rec-match-badge__value">{pct}</span>
+                <span className="event-rec-match-badge__suffix">%</span>
+              </span>
             </>
           ) : (
             <>

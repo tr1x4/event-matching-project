@@ -149,11 +149,6 @@ export function PublicProfilePage() {
     typeof myProfile?.match_interests_weight === 'number' && Number.isFinite(myProfile.match_interests_weight)
       ? myProfile.match_interests_weight
       : 0.3
-  const combinedCompatPct =
-    !isSelf && compat != null
-      ? Math.round(100 * (alpha * compat.personality_similarity + beta * compat.interests_similarity))
-      : null
-
   const onWrite = async () => {
     if (!dmGate?.can_message) return
     setDmErr(null)
@@ -215,15 +210,6 @@ export function PublicProfilePage() {
       ) : null}
 
       <section className="pp-card public-profile-identity-card">
-        {!isSelf && combinedCompatPct != null ? (
-          <div
-            className="public-profile-compat-hero-pct"
-            title="Совместимость с учётом ваших настроек весов (характер и интересы)"
-          >
-            <span className="public-profile-compat-hero-pct__value">{combinedCompatPct}</span>
-            <span className="public-profile-compat-hero-pct__suffix">%</span>
-          </div>
-        ) : null}
         <div className="pp-identity-row">
           <img className="pp-avatar-lg" src={profileAvatarSrc(p)} width={112} height={112} alt="" />
           <div>
@@ -253,6 +239,12 @@ export function PublicProfilePage() {
       <section className="pp-card">
         <div className="public-profile-interests-header">
           <h2 className="pp-section-title">Интересы</h2>
+          {!isSelf && intPct != null ? (
+            <span className="public-profile-interests-pct" aria-label={`Сходство по интересам ${intPct} процентов`}>
+              <span className="public-profile-interests-pct__value">{intPct}</span>
+              <span className="public-profile-interests-pct__suffix">%</span>
+            </span>
+          ) : null}
         </div>
         {selected.length > 0 ? (
           <div className="profile-interest-chips">
@@ -271,17 +263,21 @@ export function PublicProfilePage() {
       </section>
 
       <section className="pp-card public-profile-character-card">
-        <h2 className="pp-section-title">Характер и интересы</h2>
+        <h2 className="pp-section-title">Характер</h2>
         {isSelf ? (
           <p className="muted public-profile-character-lead">Так ваш профиль видят другие пользователи.</p>
         ) : compatErr ? (
           <p className="muted public-profile-character-lead">{compatErr}</p>
-        ) : intPct != null && charPct != null ? (
-          <p className="muted public-profile-character-lead public-profile-compat-breakdown">
-            Сходство по чертам личности: <strong>{charPct}%</strong>
-            <br />
-            Сходство по интересам: <strong>{intPct}%</strong>
-          </p>
+        ) : charPct != null ? (
+          <>
+            <div className="public-profile-char-score">{charPct}%</div>
+            <p className="muted public-profile-char-caption">
+              Сейчас при оценке <strong>совпадения по чертам</strong> смотрите на число выше. В подборе событий для вас
+              учитывается примерно <strong>{Math.round(alpha * 100)}%</strong> сходства по чертам личности и{' '}
+              <strong>{Math.round(beta * 100)}%</strong> — по общим интересам; процент по интересам с этим человеком — в
+              секции «Интересы».
+            </p>
+          </>
         ) : (
           <p className="muted public-profile-character-lead">
             Заполните «Черты личности» в своём профиле — здесь появится оценка сходства.
