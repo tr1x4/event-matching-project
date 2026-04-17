@@ -1,0 +1,182 @@
+.wizard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: color-mix(in srgb, var(--text-h) 42%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.wizard-card--wide {
+  max-width: 520px;
+  max-height: min(92svh, 800px);
+}
+
+.wizard-card {
+  width: 100%;
+  max-width: 420px;
+  max-height: min(92svh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  padding: 0;
+  text-align: left;
+}
+
+/* Шаг «Город»: без обрезки выпадающего списка и без внутреннего скролла блока */
+.wizard-card--city {
+  overflow: visible;
+  max-height: none;
+}
+
+.wizard-card-scroll--city {
+  overflow: visible;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+.wizard-traits-done {
+  padding: 0.75rem 0 0.25rem;
+}
+
+.wizard-traits-done-title {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.wizard-card-head {
+  flex-shrink: 0;
+  padding: 1.5rem 1.35rem 0.85rem;
+}
+
+.wizard-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+}
+
+.wizard-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.wizard-card-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.35rem 1.35rem 1rem;
+  scrollbar-gutter: stable;
+}
+
+.wizard-card-foot {
+  flex-shrink: 0;
+  padding: 0.75rem 1.35rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 94%, var(--text) 6%);
+}
+
+.wizard-foot-form {
+  margin: 0;
+  width: 100%;
+}
+
+.wizard-steps {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.wizard-step-pill {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.wizard-step-pill--on {
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 65%, #6366f1));
+}
+
+.wizard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0;
+}
+
+.wizard-actions .btn {
+  flex: 1 1 auto;
+  min-width: 120px;
+}
+
+.wizard-actions--avatar .btn {
+  min-width: 100px;
+}
+
+.wizard-avatar-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.wizard-avatar-preview {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background: var(--accent-bg);
+}
+
+.wizard-avatar-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wizard-avatar-file-label {
+  cursor: pointer;
+  text-align: center;
+}
+
+.wizard-avatar-name {
+  margin: 0;
+  font-size: 0.82rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wizard-card select {
+  cursor: pointer;
+}
+
+.wizard-field-error {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.wizard-card select.field-input--invalid,
+.wizard-card .field-input.field-input--invalid {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, #dc2626 38%, transparent);
+}

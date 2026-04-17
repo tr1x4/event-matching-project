@@ -1,8 +1,10 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+import os
 
-# SQLite база для events-service
-DATABASE_URL = "sqlite:///./events.db"
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+# SQLite: локально ./events.db, в Docker: например sqlite:////data/events.db
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./events.db")
 
 # Для SQLite нужен этот параметр
 engine = create_engine(

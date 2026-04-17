@@ -1,0 +1,158 @@
+.interests-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(0.5rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
+    max(0.5rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+  background: color-mix(in srgb, var(--text-h) 48%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.interests-modal {
+  width: 100%;
+  max-width: 960px;
+  height: min(calc(100dvh - 1rem), 900px);
+  max-height: min(calc(100dvh - 1rem), 900px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1rem 1rem;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.interests-modal--compact {
+  height: auto;
+  max-height: min(90dvh, 480px);
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.interests-modal--compact .interests-modal-compact-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.15rem 0.15rem 0.35rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.interests-modal--compact .interests-modal-footer {
+  margin-top: 0;
+}
+
+.interests-modal-head {
+  flex-shrink: 0;
+}
+
+.interests-modal-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.45rem;
+}
+
+.interests-sub {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+/* Только сетка карточек скроллится */
+.interests-modal-grid-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.15rem 0.25rem 0.35rem 0;
+  margin-right: -2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 0.6rem;
+}
+
+.interest-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 102px;
+  padding: 0.65rem 0.45rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 94%, var(--accent) 6%);
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-h);
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.interest-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.interest-card--on {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.interest-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--accent);
+}
+
+.interest-card--on .interest-icon-wrap {
+  color: color-mix(in srgb, var(--accent) 85%, var(--text-h));
+}
+
+.interest-icon-wrap svg {
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
+.interest-label {
+  font-size: 0.82rem;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.interests-modal-footer {
+  flex-shrink: 0;
+  margin-top: 0.65rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.interests-count {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.interests-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}

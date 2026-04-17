@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      ;(function () {
+        try {
+          var k = 'event-match-site-theme'
+          var v = localStorage.getItem(k)
+          var darkM = window.matchMedia('(prefers-color-scheme: dark)').matches
+          var resolved
+          if (v === 'light') resolved = 'light'
+          else if (v === 'dark') resolved = 'dark'
+          else resolved = darkM ? 'dark' : 'light'
+          document.documentElement.setAttribute('data-color-scheme', resolved)
+          document.documentElement.style.colorScheme = resolved
+        } catch (e) {
+          document.documentElement.setAttribute('data-color-scheme', 'light')
+          document.documentElement.style.colorScheme = 'light'
+        }
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event match</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

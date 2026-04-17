@@ -1,0 +1,167 @@
+.prm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: color-mix(in srgb, var(--text-h) 42%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.prm-scrollbar {
+  scrollbar-gutter: stable;
+}
+
+.prm-scrollbar::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.prm-scrollbar::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--border) 55%, transparent);
+  border-radius: 999px;
+}
+
+.prm-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 72%, var(--border)),
+    color-mix(in srgb, var(--accent) 45%, var(--border))
+  );
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.prm-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 88%, var(--border)),
+    color-mix(in srgb, var(--accent) 58%, var(--border))
+  );
+  background-clip: padding-box;
+}
+
+.prm-card--wide {
+  max-width: 560px;
+  max-height: min(92svh, 820px);
+}
+
+.prm-card {
+  width: 100%;
+  max-width: 440px;
+  max-height: min(90svh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  padding: 0;
+  text-align: left;
+}
+
+/* Модалка с подсказками города: без обрезки выпадающего списка */
+.prm-card--city-flow {
+  overflow: visible;
+  max-height: none;
+}
+
+.prm-card--city-flow .prm-body {
+  overflow: visible;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+.prm-head {
+  flex-shrink: 0;
+  padding: 1.25rem 1.25rem 0.65rem;
+}
+
+.prm-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+}
+
+.prm-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.35rem 1.25rem 0.85rem;
+}
+
+.prm-foot {
+  flex-shrink: 0;
+  padding: 0.85rem 1.25rem 1.15rem;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 94%, var(--text) 6%);
+}
+
+.prm-intro {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.prm-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.prm-avatar-img {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+
+.prm-file-inp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.prm-file-btn {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.prm-remove {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.prm-actions {
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.prm-card--wide {
+  max-width: 520px;
+}
+
+/** @deprecated — карточка сама скроллит только .prm-body */
+.prm-card--scroll {
+  max-height: min(88svh, 680px);
+}
+
+.event-complete-confirm-btn {
+  background: color-mix(in srgb, #dc2626 92%, var(--bg) 8%) !important;
+  color: #fff !important;
+  border: 1px solid color-mix(in srgb, #dc2626 75%, var(--border)) !important;
+}
+
+.event-complete-confirm-btn:hover:not(:disabled) {
+  filter: brightness(1.06);
+}

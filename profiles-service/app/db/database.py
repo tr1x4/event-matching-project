@@ -1,8 +1,10 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+import os
 
-# SQLite файл будет лежать рядом с проектом
-DATABASE_URL = "sqlite:///./profiles.db"
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+# SQLite: локально ./profiles.db, в Docker: sqlite:////data/profiles.db
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./profiles.db")
 
 # connect_args нужен только для SQLite
 engine = create_engine(

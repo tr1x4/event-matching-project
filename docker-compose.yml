@@ -1,0 +1,108 @@
+# Запуск из корня репозитория:
+#   docker compose up --build
+# UI: http://localhost:8080, API: 8000 match, 8001 profiles, 8002 events, 8003 auth, 8004 chats
+#
+# Все настройки для подстановки: в файле `.env`.
+
+name: event-matching
+
+services:
+  auth:
+    build: ./auth-service
+    ports:
+      - "8003:8003"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-change-me-in-production-use-long-random-string}
+      DATABASE_URL: sqlite:////data/auth.db
+    volumes:
+      - auth-db:/data
+
+  profiles:
+    build: ./profiles-service
+    ports:
+      - "8001:8001"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-change-me-in-production-use-long-random-string}
+      DATABASE_URL: sqlite:////data/profiles.db
+      STORAGE_PATH: ${STORAGE_PATH:-/data}
+      INTERNAL_PROFILE_TOKEN: ${INTERNAL_PROFILE_TOKEN:-dev-internal-profile-token}
+      DADATA_API_KEY: ${DADATA_API_KEY:-}
+      DADATA_SECRET_KEY: ${DADATA_SECRET_KEY:-}
+    volumes:
+      - profiles-db:/data
+    depends_on:
+      - auth
+
+  events:
+    build: ./events-service
+    ports:
+      - "8002:8002"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-change-me-in-production-use-long-random-string}
+      DATABASE_URL: sqlite:////data/events.db
+      PROFILES_SERVICE_URL: ${PROFILES_SERVICE_URL:-http://profiles:8001}
+      CHATS_SERVICE_URL: ${CHATS_SERVICE_URL:-http://chats:8004}
+      INTERNAL_CHAT_TOKEN: ${INTERNAL_CHAT_TOKEN:-dev-internal-chat-token}
+      MATCH_SERVICE_URL: ${MATCH_SERVICE_URL:-http://match:8000}
+      INTERNAL_MATCH_TOKEN: ${INTERNAL_MATCH_TOKEN:-dev-internal-match-token}
+      STORAGE_PATH: ${STORAGE_PATH:-/data}
+    volumes:
+      - events-db:/data
+    depends_on:
+      - profiles
+
+  match:
+    build: ./match-service
+    ports:
+      - "8000:8000"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-change-me-in-production-use-long-random-string}
+      PROFILES_SERVICE_URL: ${PROFILES_SERVICE_URL:-http://profiles:8001}
+      EVENTS_SERVICE_URL: ${EVENTS_SERVICE_URL:-http://events:8002}
+      INTERNAL_PROFILE_TOKEN: ${INTERNAL_PROFILE_TOKEN:-dev-internal-profile-token}
+      INTERNAL_MATCH_TOKEN: ${INTERNAL_MATCH_TOKEN:-dev-internal-match-token}
+    depends_on:
+      - profiles
+      - events
+
+  chats:
+    build: ./chats-service
+    ports:
+      - "8004:8004"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-change-me-in-production-use-long-random-string}
+      DATABASE_URL: sqlite:////data/chats.db
+      STORAGE_PATH: ${STORAGE_PATH:-/data}
+      PROFILES_SERVICE_URL: ${PROFILES_SERVICE_URL:-http://profiles:8001}
+      EVENTS_SERVICE_URL: ${EVENTS_SERVICE_URL:-http://events:8002}
+      INTERNAL_CHAT_TOKEN: ${INTERNAL_CHAT_TOKEN:-dev-internal-chat-token}
+      INTERNAL_PROFILE_TOKEN: ${INTERNAL_PROFILE_TOKEN:-dev-internal-profile-token}
+    volumes:
+      - chats-db:/data
+    depends_on:
+      - profiles
+      - events
+
+  web:
+    build:
+      context: ./web
+      args:
+        VITE_AUTH_URL: ${VITE_AUTH_URL:-http://127.0.0.1:8003}
+        VITE_PROFILES_URL: ${VITE_PROFILES_URL:-http://127.0.0.1:8001}
+        VITE_MATCH_URL: ${VITE_MATCH_URL:-http://127.0.0.1:8000}
+        VITE_EVENTS_URL: ${VITE_EVENTS_URL:-http://127.0.0.1:8002}
+        VITE_CHATS_URL: ${VITE_CHATS_URL:-http://127.0.0.1:8004}
+    ports:
+      - "8080:80"
+    depends_on:
+      - match
+      - auth
+      - profiles
+      - events
+      - chats
+
+volumes:
+  auth-db:
+  profiles-db:
+  events-db:
+  chats-db:

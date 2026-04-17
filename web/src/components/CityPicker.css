@@ -1,0 +1,80 @@
+.city-picker .req-mark {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.city-picker .field-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.city-picker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.city-picker__loading,
+.city-picker__empty,
+.city-picker__error {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.city-picker__error {
+  color: #b91c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  .city-picker__error {
+    color: #fca5a5;
+  }
+}
+
+.city-picker__input.field-input {
+  background: color-mix(in srgb, var(--bg) 88%, var(--accent) 12%);
+}
+
+.city-picker__list {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.city-picker__list--unbounded {
+  max-height: none;
+  overflow-y: visible;
+  z-index: 80;
+}
+
+.city-picker__option {
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.85rem;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.city-picker__option:hover {
+  background: var(--accent-bg);
+}

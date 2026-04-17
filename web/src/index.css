@@ -1,0 +1,123 @@
+html {
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 16px/145% var(--sans);
+  letter-spacing: 0.02em;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-gutter: stable;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 48%, var(--border)) color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+html[data-color-scheme='light'] {
+  color-scheme: light;
+  --text: #6b6375;
+  --text-h: #08060d;
+  --muted: #6b7280;
+  --bg: #fff;
+  --card-inner: #f3f0f8;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.08) 0 10px 15px -3px, rgba(0, 0, 0, 0.04) 0 4px 6px -2px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+html[data-color-scheme='dark'] {
+  color-scheme: dark;
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --muted: #9ca3af;
+  --bg: #0f1014;
+  --card-inner: #181a22;
+  --border: #2e303a;
+  --code-bg: #1a1b22;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.12);
+  --accent-border: rgba(192, 132, 252, 0.45);
+  --shadow:
+    rgba(0, 0, 0, 0.45) 0 12px 24px -6px, rgba(0, 0, 0, 0.3) 0 6px 12px -4px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+#root {
+  min-height: 100svh;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a.btn,
+.btn {
+  text-decoration: none;
+}
+
+.toast-stack {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-end;
+  max-width: min(380px, 94vw);
+  pointer-events: none;
+}
+
+.toast-stack .toast-item {
+  pointer-events: auto;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.toast-stack .toast-item:hover {
+  border-color: var(--accent-border);
+}

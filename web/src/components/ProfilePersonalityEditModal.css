@@ -1,0 +1,159 @@
+.bf-hub-sub {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+}
+
+.bf-trait-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.bf-trait-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  background: color-mix(in srgb, var(--bg) 92%, var(--text) 8%);
+}
+
+.bf-trait-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.bf-trait-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.bf-trait-pct {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.bf-trait-hint {
+  margin: 0.2rem 0 0.5rem;
+  font-size: 0.82rem;
+  color: var(--muted, #6b7280);
+  line-height: 1.35;
+}
+
+.bf-trait-bar-wrap {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+  overflow: hidden;
+}
+
+.bf-trait-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 65%, #818cf8));
+}
+
+.bf-badge {
+  font-size: 0.85rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  margin-bottom: 0.85rem;
+}
+
+.bf-badge--accent {
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.bf-status-block {
+  margin-bottom: 1rem;
+}
+
+.bf-status-line {
+  margin: 0.15rem 0;
+  font-size: 0.9rem;
+}
+
+.bf-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.bf-how-wrap {
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+
+.bf-how-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.bf-how-chevron {
+  flex-shrink: 0;
+  opacity: 0.92;
+  font-size: 0.75rem;
+}
+
+.bf-reset-muted {
+  color: color-mix(in srgb, #b91c1c 48%, var(--muted));
+  border-color: color-mix(in srgb, #b91c1c 22%, var(--border));
+}
+
+html[data-color-scheme='dark'] .bf-reset-muted {
+  color: color-mix(in srgb, #fca5a5 55%, var(--muted));
+  border-color: color-mix(in srgb, #fca5a5 28%, var(--border));
+}
+
+.bf-how-text {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.bf-confirm-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--text-h) 35%, transparent);
+  border-radius: inherit;
+  z-index: 3;
+}
+
+.bf-confirm-card {
+  max-width: 360px;
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.bf-confirm-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.bf-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.prm-overlay .prm-card {
+  position: relative;
+}

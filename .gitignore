@@ -21,3 +21,10 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Локальные секреты и настройки docker compose (шаблон: .env.example)
+.env
+
+# Frontend (Vite)
+web/node_modules/
+web/dist/
